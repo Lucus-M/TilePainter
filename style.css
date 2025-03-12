@@ -1,0 +1,148 @@
+*{
+    margin: 0;
+    padding: 0;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+
+html, body{
+    background-color:rgb(29, 29, 41);
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-flow: column;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+}
+
+h1{
+    font-size: 1.3em;
+}
+
+header{
+    flex: 0 1 auto;
+}
+
+#UIScreen{
+    background-color: rgb(12, 11, 24);
+    flex: 1 1 auto;
+    display: flex;
+    overflow: hidden;
+}
+
+footer{
+    flex: 0 1 auto;
+}
+
+#canvasContainer{
+    flex-grow: 1;
+    overflow: auto;
+    position: relative;
+}
+
+#mainCanvas{
+    background-color: gray;
+    background-image: url("sampleImgs/transparentbg.png");
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    position: absolute;
+}
+
+.tileSelectorSidebar{
+    background-color:rgb(20, 20, 37);
+    margin-left: auto;
+    width: 13.5em;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+#tileSelectorContainer{
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgb(24, 18, 32);
+    flex-grow: 1;
+    border-top: 1px solid white;
+}
+
+#tileSelector{
+    border: 2px solid white;
+    border-radius: 3px;
+    height: 100%;
+    font-size: 0;
+}
+
+#uploadButton{
+    float: right;
+}
+
+.tile{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.tile > img{
+    width: 100%;
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.tile:hover{
+    cursor: pointer;
+    filter: brightness(150%);
+    border: 1px solid white;
+}
+
+.tile.selected{
+    border: 2px solid white;
+    box-sizing: border-box;
+}
+
+.tile:active {
+    filter: brightness(200%);
+    border: 3px solid white;
+}
+
+.optionButton{
+    overflow: hidden; 
+    width: 32px;
+    height: 32px;   
+    margin: 3px;
+    display: inline-block;
+}
+
+.optionButton:hover{
+    cursor: pointer;
+}
+
+.optionButton > img:active{
+    width: 30px;
+    padding-top: 2px;
+    padding-left: 2px;
+}
+
+.toolSelection{
+    border: 2px solid white;
+    border-radius: 2px;
+    padding: 2px;
+    margin: 5px;
+}
+
+.toolSelection > p{
+    float: right;
+}
+
+.toolSelection:hover{
+    background-color: rgb(35, 35, 61);
+}
+
+.toolSelection.selected{
+    background-color: rgb(35, 35, 61);
+    border-color: yellow;
+}

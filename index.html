@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="pointerLogo.ico">
+    <title>TileStudio</title>
+</head>
+<body>
+    <header>
+        <h1>TileStudio</h1>
+        </header>
+    <section id="UIScreen">
+        <div class="tileSelectorSidebar" id="tools" style="visibility: hidden;">
+            <div id="toolSelectorContainer">
+                <div>
+                    <h2 style="display: inline-block">Tools</h2>
+                </div>
+
+                <div class="toolSelection">
+                    <img src="sampleImgs/pencil.png">
+                    <p>Pencil</p>
+                </div>
+                <div class="toolSelection">
+                    <img src="sampleImgs/brush.png">
+                    <p>Brush</p>
+                </div>
+                <div class="toolSelection">
+                    <img src="sampleImgs/bucket.png">
+                    <p>Fill Bucket</p>
+                </div>
+                <div class="toolSelection">
+                    <img src="sampleImgs/rectangle.png">
+                    <p>Rectangle</p>
+                </div>
+                <div class="toolSelection">
+                    <img src="sampleImgs/ellipse.png">
+                    <p>Ellipse</p>
+                </div>
+                <div class="toolSelection">
+                    <img src="sampleImgs/trash.png">
+                    <p>Delete</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="canvasContainer">
+            <canvas id="mainCanvas">
+
+            </canvas>
+        </div>
+
+        
+
+        <div class="tileSelectorSidebar" id="tileset">
+            <div>
+                <h2 style="display: inline-block">Tiles</h2>
+                <div id="uploadButton" class="optionButton" onclick="clickUpload()">
+                    <img src="sampleImgs/add.png">
+                </div>
+                <input style="display: none;" type="file" id="imageUpload" accept="image/*">
+            </div>
+            <div id="tileSelectorContainer">
+                <div id="tileSelector">
+                
+                </div>
+            </div>
+            <div>
+                <div id="uploadSheetButton" class="optionButton">
+                    <img src="sampleImgs/uploadtileset.png">
+                </div>
+                <div id="downloadSheetButton" class="optionButton">
+                    <img src="sampleImgs/downloadtileset.png">
+                </div>
+                <div id="downloadImage" class="optionButton">
+                    <img src="sampleImgs/downloadImage.png">
+                </div>
+                <input style="display: none;" type="file" id="uploadSheet" accept="image/*">
+                <input style="display: none;" type="file" id="downloadSheet" accept="image/*">
+            </div>
+        </div>
+
+        
+    </section>
+
+    <footer>
+        <p style="display: inline-block;">&copy; Lucus M, 2025 - Ver 0802252011</p>
+        <p id="scaleDisplay" style="float:right;">Scale = 1.0</p>
+    </footer>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/eventListeners.js"></script>
+</body>
+</html>
