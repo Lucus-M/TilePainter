@@ -11,6 +11,8 @@ let tileSize = {
     y: 16 //height
 }
 
+let brushRadius = parseInt(document.getElementById("brushSize").value);
+
 let selectedTool = "pencil";
 
 let scale = 1; //zoom scale
@@ -76,18 +78,48 @@ function rescale(){
     redrawCanvas();
 }
 
+function drawing(){
+    let drawnTiles = [];
+
+    for(let y = 0; y < (brushRadius + 1); y++){
+        for(let x = 0; x < (brushRadius + 1); x++){
+            drawnTiles.push([0,0]);
+            drawnTiles[drawnTiles.length-1][0] = (tileY+Math.ceil(brushRadius/2))-y
+            drawnTiles[drawnTiles.length-1][1] = (tileX+Math.ceil(brushRadius/2))-x
+        }
+    }
+
+    return drawnTiles;
+}
+
+function drawTiles(drawnTiles, selectedTile){
+    for(let i = 0; i < drawnTiles.length; i++){
+        updateTile(drawnTiles[i][0], drawnTiles[i][1], selectedTile);
+    }
+}
+
+function drawCursorTiles(drawnTiles, selectedTile){
+    for(let i = 0; i < drawnTiles.length; i++){
+        ctx.drawImage(tileSelectorArray[selectedTile].img, drawnTiles[i][1]*tileSize.x*scale, drawnTiles[i][0]*tileSize.y*scale, tileSize.x*scale, tileSize.y*scale);
+    }
+}
+
 function updateMousePos(event){
+    //previous selected tile
     const prevtileY = tileY;
     const prevtileX = tileX;
 
+    //canvas 
     let cvsBoundingRect = cvs.getBoundingClientRect();
 
     const cvsy = cvsBoundingRect.y;
     const cvsx = cvsBoundingRect.x;
 
+    //mouse position
     const x = event.clientX;
     const y = event.clientY;
 
+    //calculate which tile the user is hovering over
     tileX = Math.floor((x-cvsx)/(tileSize.x*scale));
     tileY = Math.floor((y-cvsy)/(tileSize.x*scale));
 
@@ -95,26 +127,32 @@ function updateMousePos(event){
     if(!((prevtileX === tileX) && (prevtileY === tileY))){
         //click and drag draw
         if(clicking){
-            updateTile(tileY, tileX, selectedTile);
+            drawTiles(drawing(), selectedTile);
         }
         else if(rightClicking){
-            updateTile(tileY, tileX, 0);
+            drawTiles(drawing(), 0);
         }
     
         redrawCanvas();
     
-        //cursor
+        //cursor tiles
         if(selectedTile != 0){
-            ctx.drawImage(tileSelectorArray[selectedTile].img, tileX*tileSize.x*scale, tileY*tileSize.y*scale, tileSize.x*scale, tileSize.y*scale);
+            drawCursorTiles(drawing(), selectedTile);
         }
     
+        //cursor box
         ctx.beginPath();
         ctx.strokeStyle = "white";
-        ctx.rect(tileX*tileSize.x*scale, tileY*tileSize.y*scale, tileSize.x*scale, tileSize.y*scale);
+
+        ctx.rect((tileX-Math.floor(brushRadius/2))*tileSize.x*scale, 
+                 (tileY-Math.floor(brushRadius/2))*tileSize.y*scale, 
+                  tileSize.x*(brushRadius+1)*scale, 
+                  tileSize.y*(brushRadius+1)*scale);
         ctx.stroke();
     }
 }
 
+//update tile position
 function updateTile(ty, tx, tileNum){
     if(ty >= 0 && ty < tileArray.length && tx >= 0 && tx < tileArray[0].length){
         tileArray[ty][tx] = tileNum;
@@ -125,6 +163,7 @@ function clickUpload(){
     document.getElementById("imageUpload").click(); // Open file picker
 }
 
+//upload custom tile
 function addNewTile(image){
     tileSelectorArray.push({
         element: document.createElement("div"),
@@ -146,6 +185,7 @@ function addNewTile(image){
     tileSelector.appendChild(tileSelectorArray[cur].element);
 }
 
+//select tile to draw
 function selectTile(i){
     tileSelectorArray[selectedTile].element.classList.remove("selected");
     tileSelectorArray[i].element.classList.add("selected");
@@ -153,6 +193,7 @@ function selectTile(i){
     selectedTile = i;
 }
 
+//select new tool
 function selectTool(tool){
     selectedTool = tool;
     
