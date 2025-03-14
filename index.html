@@ -9,39 +9,46 @@
 </head>
 <body>
     <header>
-        <h1>TileStudio</h1>
+        <h1>TilePainter</h1>
         </header>
     <section id="UIScreen">
-        <div class="tileSelectorSidebar" id="tools" style="visibility: hidden;">
+        <div class="tileSelectorSidebar" id="tools">
             <div id="toolSelectorContainer">
                 <div>
                     <h2 style="display: inline-block">Tools</h2>
                 </div>
 
-                <div class="toolSelection">
-                    <img src="sampleImgs/pencil.png">
-                    <p>Pencil</p>
+                <div>
+                    <label for="brushSize">Brush Size: <span id="brushSizeValue">1</span><br></label>
+                    <input type="range" id="brushSize" name="brushSize" value="0" min="0" max="15">
                 </div>
-                <div class="toolSelection">
-                    <img src="sampleImgs/brush.png">
-                    <p>Brush</p>
-                </div>
-                <div class="toolSelection">
-                    <img src="sampleImgs/bucket.png">
-                    <p>Fill Bucket</p>
-                </div>
-                <div class="toolSelection">
-                    <img src="sampleImgs/rectangle.png">
-                    <p>Rectangle</p>
-                </div>
-                <div class="toolSelection">
-                    <img src="sampleImgs/ellipse.png">
-                    <p>Ellipse</p>
-                </div>
-                <div class="toolSelection">
-                    <img src="sampleImgs/trash.png">
-                    <p>Delete</p>
-                </div>
+
+                <span style="visibility: hidden">
+                    <div class="toolSelection">
+                        <img src="sampleImgs/pencil.png">
+                        <p>Pencil</p>
+                    </div>
+                    <div class="toolSelection">
+                        <img src="sampleImgs/brush.png">
+                        <p>Brush</p>
+                    </div>
+                    <div class="toolSelection">
+                        <img src="sampleImgs/bucket.png">
+                        <p>Fill Bucket</p>
+                    </div>
+                    <div class="toolSelection">
+                        <img src="sampleImgs/rectangle.png">
+                        <p>Rectangle</p>
+                    </div>
+                    <div class="toolSelection">
+                        <img src="sampleImgs/ellipse.png">
+                        <p>Ellipse</p>
+                    </div>
+                    <div class="toolSelection">
+                        <img src="sampleImgs/trash.png">
+                        <p>Delete</p>
+                    </div>
+                </span>
             </div>
         </div>
 
