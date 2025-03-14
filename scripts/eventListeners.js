@@ -6,10 +6,10 @@ cvs.addEventListener('mousedown', (event) => {
     //right or left click (right click for erasing)
     if(event.button === 0){
         clicking = true;
-        updateTile(tileY, tileX, selectedTile);
+        drawTiles(drawing(), selectedTile);
     }
     else if(event.button === 2){
-        updateTile(tileY, tileX, 0);
+        drawTiles(drawing(), 0);
         rightClicking = true;
     }
     
@@ -67,4 +67,7 @@ document.getElementById("imageUpload").addEventListener("change", function(event
     }
 });
 
-
+document.getElementById("brushSize").addEventListener("input", function(event){
+    brushRadius = parseInt(document.getElementById("brushSize").value);
+    document.getElementById("brushSizeValue").innerText = brushRadius + 1;
+})
