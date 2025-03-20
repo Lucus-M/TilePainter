@@ -62,7 +62,13 @@ function redrawCanvas(){
             //0 is transparent
             if(tileArray[iy][ix] != 0){
                 //draw tile images             
-                ctx.drawImage(tileSelectorArray[tileArray[iy][ix]].img, (ix*tileSize.x) * scale, (iy*tileSize.y) * scale, tileSize.x*scale, tileSize.y*scale);
+                ctx.drawImage(tileSelectorArray[tileArray[iy][ix]].img, 
+                              //positioning * scale
+                              (ix*tileSize.x) * scale, 
+                              (iy*tileSize.y) * scale,
+                              //image width and height 
+                              tileSize.x*scale, 
+                              tileSize.y*scale);
             }
         }
     }
@@ -81,27 +87,43 @@ function rescale(){
 function drawing(){
     let drawnTiles = [];
 
+    //selection of tile coordinates based on brush radius
     for(let y = 0; y < (brushRadius + 1); y++){
         for(let x = 0; x < (brushRadius + 1); x++){
             drawnTiles.push([0,0]);
+            //y position of updated tile
             drawnTiles[drawnTiles.length-1][0] = (tileY+Math.ceil(brushRadius/2))-y
+            //x position of updated tile
             drawnTiles[drawnTiles.length-1][1] = (tileX+Math.ceil(brushRadius/2))-x
         }
     }
 
+    //return array for drawing
     return drawnTiles;
 }
 
-function drawTiles(drawnTiles, selectedTile){
+function drawTiles(drawnTiles, tileIndex){
     for(let i = 0; i < drawnTiles.length; i++){
-        updateTile(drawnTiles[i][0], drawnTiles[i][1], selectedTile);
+        updateTile(drawnTiles[i][0], drawnTiles[i][1], tileIndex);
     }
 }
 
-function drawCursorTiles(drawnTiles, selectedTile){
-    for(let i = 0; i < drawnTiles.length; i++){
-        ctx.drawImage(tileSelectorArray[selectedTile].img, drawnTiles[i][1]*tileSize.x*scale, drawnTiles[i][0]*tileSize.y*scale, tileSize.x*scale, tileSize.y*scale);
+function drawCursor(drawnTiles){
+    if(selectedTile != 0){
+        for(let i = 0; i < drawnTiles.length; i++){
+            ctx.drawImage(tileSelectorArray[selectedTile].img, drawnTiles[i][1]*tileSize.x*scale, drawnTiles[i][0]*tileSize.y*scale, tileSize.x*scale, tileSize.y*scale);
+        }
     }
+
+    //cursor box
+    ctx.beginPath();
+    ctx.strokeStyle = "white";
+
+    ctx.rect((tileX-Math.floor(brushRadius/2))*tileSize.x*scale, 
+                (tileY-Math.floor(brushRadius/2))*tileSize.y*scale, 
+                tileSize.x*(brushRadius+1)*scale, 
+                tileSize.y*(brushRadius+1)*scale);
+    ctx.stroke();
 }
 
 function updateMousePos(event){
@@ -136,19 +158,7 @@ function updateMousePos(event){
         redrawCanvas();
     
         //cursor tiles
-        if(selectedTile != 0){
-            drawCursorTiles(drawing(), selectedTile);
-        }
-    
-        //cursor box
-        ctx.beginPath();
-        ctx.strokeStyle = "white";
-
-        ctx.rect((tileX-Math.floor(brushRadius/2))*tileSize.x*scale, 
-                 (tileY-Math.floor(brushRadius/2))*tileSize.y*scale, 
-                  tileSize.x*(brushRadius+1)*scale, 
-                  tileSize.y*(brushRadius+1)*scale);
-        ctx.stroke();
+        drawCursor(drawing());
     }
 }
 
@@ -161,6 +171,9 @@ function updateTile(ty, tx, tileNum){
 
 function clickUpload(){
     document.getElementById("imageUpload").click(); // Open file picker
+}
+function clickJSON(){
+    document.getElementById("jsonUpload").click();
 }
 
 //upload custom tile
@@ -199,20 +212,26 @@ function selectTool(tool){
     
 }
 
+function resetTileSelectorArray(){
+    //Init transparent tile
+    tileSelectorArray = [];
+    let transparentImg = new Image();
+    transparentImg.src = "sampleImgs/transparentbg.png";
+    addNewTile(transparentImg);
+    selectTile(0);
+}
+
 function initUI(){
     //Init canvas
     resize(); //resize canvas based on user's screen dimensions
     tileArray = new Array(cvs.height / tileSize.y); //create tile array (how ever many tiles fit within the user's canvas dimensions)
     createCanvas(); //initialize tiles array
 
-    //Init transparent tile
-    let transparentImg = new Image();
-    transparentImg.src = "sampleImgs/transparentbg.png";
-    addNewTile(transparentImg);
-    selectTile(0);
+    resetTileSelectorArray();
 
     redrawCanvas();
 
+    //load sample tiles
     for(let i = 0; i <= 5; i++){
         // Fetch the sample tile images and store them as base 64 data
         fetch("http://www.lucusdm.com/lucus/tiles/sampleTiles/" + i + ".png")
@@ -222,14 +241,12 @@ function initUI(){
 
                 reader.onloadend = function() {
                     const sampleTile = new Image();
-                    sampleTile.onload = function() {
-                        addNewTile(sampleTile);
-                    }
 
                     const base64data = reader.result;
-                    console.log(base64data);
+                    //console.log(base64data);
 
                     sampleTile.src = base64data;
+                    addNewTile(sampleTile);
                 };
 
                 reader.readAsDataURL(blob);
