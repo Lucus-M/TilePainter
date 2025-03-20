@@ -216,7 +216,7 @@ function resetTileSelectorArray(){
     //Init transparent tile
     tileSelectorArray = [];
     let transparentImg = new Image();
-    transparentImg.src = "sampleImgs/transparentbg.png";
+    transparentImg.src = "http://www.lucusdm.com/lucus/images/tiles/tileUI/transparentbg.png";
     addNewTile(transparentImg);
     selectTile(0);
 }
@@ -234,7 +234,7 @@ function initUI(){
     //load sample tiles
     for(let i = 0; i <= 5; i++){
         // Fetch the sample tile images and store them as base 64 data
-        fetch("http://www.lucusdm.com/lucus/tiles/sampleTiles/" + i + ".png")
+        fetch("http://www.lucusdm.com/lucus/images/tiles/sampleTiles/"+ i +".png")
             .then(response => response.blob()) 
             .then(blob => {
                 const reader = new FileReader();
