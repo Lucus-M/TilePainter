@@ -212,6 +212,30 @@ function initUI(){
     selectTile(0);
 
     redrawCanvas();
+
+    for(let i = 0; i <= 5; i++){
+        // Fetch the sample tile images and store them as base 64 data
+        fetch("http://www.lucusdm.com/lucus/tiles/sampleTiles/" + i + ".png")
+            .then(response => response.blob()) 
+            .then(blob => {
+                const reader = new FileReader();
+
+                reader.onloadend = function() {
+                    const sampleTile = new Image();
+                    sampleTile.onload = function() {
+                        addNewTile(sampleTile);
+                    }
+
+                    const base64data = reader.result;
+                    console.log(base64data);
+
+                    sampleTile.src = base64data;
+                };
+
+                reader.readAsDataURL(blob);
+            })
+        .catch(error => console.error('Error fetching image:', error));
+    }
 }
 
 initUI();
