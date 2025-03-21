@@ -146,3 +146,7 @@ footer{
     background-color: rgb(35, 35, 61);
     border-color: yellow;
 }
+
+a{
+    color: rgb(110, 110, 199);
+}
