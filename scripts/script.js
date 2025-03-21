@@ -1,9 +1,9 @@
 //tile selector menu
-let tileSelector = document.getElementById("tileSelector");
+const tileSelector = document.getElementById("tileSelector");
 
 //get canvas ctx
-let cvs = document.getElementById("mainCanvas");
-let ctx = cvs.getContext("2d");
+const cvs = document.getElementById("mainCanvas");
+const ctx = cvs.getContext("2d");
 
 //pixel size of tiles
 let tileSize = {
@@ -12,8 +12,6 @@ let tileSize = {
 }
 
 let brushRadius = parseInt(document.getElementById("brushSize").value);
-
-let selectedTool = "pencil";
 
 let scale = 1; //zoom scale
 
@@ -84,12 +82,13 @@ function rescale(){
     redrawCanvas();
 }
 
-function drawing(){
+function drawing(selectedTile){
     let drawnTiles = [];
 
     //selection of tile coordinates based on brush radius
     for(let y = 0; y < (brushRadius + 1); y++){
         for(let x = 0; x < (brushRadius + 1); x++){
+            //add new coordinates to list of tiles to draw to
             drawnTiles.push([0,0]);
             //y position of updated tile
             drawnTiles[drawnTiles.length-1][0] = (tileY+Math.ceil(brushRadius/2))-y
