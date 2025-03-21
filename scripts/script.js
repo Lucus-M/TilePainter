@@ -143,7 +143,7 @@ function updateMousePos(event){
 
     //calculate which tile the user is hovering over
     tileX = Math.floor((x-cvsx)/(tileSize.x*scale));
-    tileY = Math.floor((y-cvsy)/(tileSize.x*scale));
+    tileY = Math.floor((y-cvsy)/(tileSize.y*scale));
 
     
     if(!((prevtileX === tileX) && (prevtileY === tileY))){

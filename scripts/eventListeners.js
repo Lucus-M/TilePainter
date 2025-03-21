@@ -86,6 +86,9 @@ document.getElementById("jsonUpload").addEventListener("change", function(event)
 
                 console.log(jsonContent);
 
+                tileSize.x = jsonContent.tileSize.x;
+                tileSize.y = jsonContent.tileSize.y;
+
                 //reset tile selection
                 selectTile(0);
                 document.querySelectorAll('.tile').forEach(element => {
@@ -101,7 +104,8 @@ document.getElementById("jsonUpload").addEventListener("change", function(event)
                 }
 
                 tileArray = jsonContent.tileMap;
-                redrawCanvas();
+                
+                rescale();
                 console.log("redrew canvas");
 
             } catch (error) {
