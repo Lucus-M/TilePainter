@@ -29,7 +29,7 @@ export default class TileSelector {
 
         for(let i = 0; i <= amount; i++){
             // Fetch the sample tile images and store them as base 64 data
-            fetch("http://.../images/tiles/sampleTiles/"+ i +".png")
+            fetch("http://www.lucusdm.com/lucus/images/tiles/sampleTiles/"+ i +".png")
                 .then(response => response.blob()) 
                 .then(blob => {
                     this.uploadImage(blob);
@@ -67,7 +67,7 @@ export default class TileSelector {
         //Init transparent tile
         this.arr = [];
         let transparentImg = new Image();
-        transparentImg.src = "http://.../images/tiles/tileUI/transparentbg.png";
+        transparentImg.src = "http://www.lucusdm.com/lucus/images/tiles/tileUI/transparentbg.png";
         this.addNewTile(transparentImg);
 
         this.selected = 0;
