@@ -18,11 +18,13 @@
                     <h2 style="display: inline-block">Tools</h2>
                 </div>
 
+                <!--brush size slider-->
                 <div>
                     <label for="brushSize">Brush Size: <span id="brushSizeValue">1</span><br></label>
                     <input type="range" id="brushSize" name="brushSize" value="0" min="0" max="15">
                 </div>
 
+                <!--tool selection-->
                 <span style="visibility: hidden">
                     <div class="toolSelection">
                         <img src="http://lucusdm.com/lucus/images/tiles/tileUI/pencil.png">
@@ -52,17 +54,18 @@
             </div>
         </div>
 
-
+        <!--canvas for drawing-->
         <div id="canvasContainer">
             <canvas id="mainCanvas">
 
             </canvas>
         </div>
 
+        <!--right sidebar, tile selector and options-->
         <div class="tileSelectorSidebar" id="tileset">
             <div>
                 <h2 style="display: inline-block">Tiles</h2>
-                <div id="uploadButton" class="optionButton" onclick="clickUpload()">
+                <div id="uploadButton" class="optionButton" onclick="document.getElementById('imageUpload').click()">
                     <img src="http://lucusdm.com/lucus/images/tiles/tileUI/add.png" alt="add tile">
                 </div>
                 <input style="display: none;" type="file" id="imageUpload" accept="image/*" />
@@ -73,7 +76,7 @@
                 </div>
             </div>
             <div>
-                <div id="uploadSheetButton" class="optionButton" onclick="clickJSON()">
+                <div id="uploadSheetButton" class="optionButton" onclick="document.getElementById('jsonUpload').click()">
                     <img src="http://lucusdm.com/lucus/images/tiles/tileUI/uploadtileset.png" alt="upload project json">
                 </div>
                 <input style="display: none;" type="file" id="jsonUpload" accept=".json" />
@@ -99,7 +102,6 @@
 
         <p id="scaleDisplay" style="float:right;">Scale = 1.0</p>
     </footer>
-    <script src="scripts/script.js"></script>
-    <script src="scripts/eventListeners.js"></script>
+    <script type="module" src="scripts/main.js"></script>
 </body>
 </html>
