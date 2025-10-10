@@ -78,22 +78,55 @@ export default class Canvas {
         this.redrawCanvas(tileSelector);
     }
 
-    drawing(brushRadius, hoveredTile){
+    drawing(tilePoints, hoveredTile){
         let drawnTiles = [];
 
+        console.log("cvs:" + tilePoints.x + ", " + tilePoints.y);
         //selection of tile coordinates based on brush radius
-        for(let y = 0; y < (brushRadius + 1); y++){
-            for(let x = 0; x < (brushRadius + 1); x++){
+        for(let y = 0; y < (tilePoints.y + 1); y++){
+            for(let x = 0; x < (tilePoints.x + 1); x++){
                 //add new coordinates to list of tiles to draw to
                 drawnTiles.push([0,0]);
                 //y position of updated tile
-                drawnTiles[drawnTiles.length-1][0] = (hoveredTile.y+Math.ceil(brushRadius/2))-y
+                drawnTiles[drawnTiles.length-1][0] = (hoveredTile.y+Math.ceil(tilePoints.y/2))-y
                 //x position of updated tile
-                drawnTiles[drawnTiles.length-1][1] = (hoveredTile.x+Math.ceil(brushRadius/2))-x
+                drawnTiles[drawnTiles.length-1][1] = (hoveredTile.x+Math.ceil(tilePoints.x/2))-x
             }
         }
 
         //return array for drawing
+        return drawnTiles;
+    }
+    
+    selectTiles(startPoint, endPoint){
+        let drawnTiles = [];
+
+        let start = startPoint;
+        let end = endPoint;
+
+        if(start.x > end.x){
+            let temp = end.x;
+            end.x = start.x;
+            start.x = temp;
+        }
+        if(start.y > end.y){
+            let temp = end.y;
+            end.y = start.y;
+            start.y = temp;
+        }
+
+        let width = end.x - start.x;
+        let height = end.y - start.y;
+
+        for(let y = 0; y < height+1; y++){
+            for(let x = 0; x < width+1; x++){
+                drawnTiles.push([0,0]);
+                drawnTiles[drawnTiles.length-1][0] = start.y + y;
+                drawnTiles[drawnTiles.length-1][1] = start.x + x;
+            }
+        }
+
+        console.log("bababa" + start)
         return drawnTiles;
     }
 
