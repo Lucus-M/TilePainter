@@ -19,8 +19,8 @@ export default class TileSelector {
             this.selectTile(cur);
         })
         this.arr[cur].element.innerHTML = "<img src='" + 
-                                                            this.arr[cur].img.src + 
-                                                        "'>";
+                                            this.arr[cur].img.src + 
+                                            "'>";
         document.getElementById("tileSelector").appendChild(this.arr[cur].element);
     }
 
