@@ -25,28 +25,29 @@
                 </div>
 
                 <!--tool selection-->
-                <span style="visibility: hidden">
-                    <div class="toolSelection">
-                        <img src="http://lucusdm.com/lucus/images/tiles/tileUI/pencil.png">
-                        <p>Pencil</p>
-                    </div>
-                    <div class="toolSelection">
+                <span>
+                    <div class="toolSelection" onclick="user.tool = 'paintbrush'">
                         <img src="http://lucusdm.com/lucus/images/tiles/tileUI/brush.png">
                         <p>Brush</p>
                     </div>
+                    <!--
                     <div class="toolSelection">
                         <img src="http://lucusdm.com/lucus/images/tiles/tileUI/bucket.png">
                         <p>Fill Bucket</p>
                     </div>
-                    <div class="toolSelection">
+                    -->
+                    <div class="toolSelection" onclick="user.tool = 'rectangle'">
                         <img src="http://lucusdm.com/lucus/images/tiles/tileUI/rectangle.png">
                         <p>Rectangle</p>
                     </div>
+                    <!--
                     <div class="toolSelection">
                         <img src="http://lucusdm.com/lucus/images/tiles/tileUI/ellipse.png">
                         <p>Ellipse</p>
                     </div>
-                    <div class="toolSelection">
+                    -->
+
+                    <div class="toolSelection" onclick="user.clearCanvas()">
                         <img src="http://lucusdm.com/lucus/images/tiles/tileUI/trash.png">
                         <p>Delete</p>
                     </div>

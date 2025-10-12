@@ -11,8 +11,9 @@ export default class User {
         this.tileSelector.loadSampleTiles();
         this.brushRadius; 
         this.setBrushRadius();
+        this.tileToDraw = 0;
 
-        this.tool = "rectangle";
+        this.tool = "paintbrush";
         this.selectStartPoint = {
             x: 0,
             y: 0
@@ -177,14 +178,14 @@ export default class User {
         // right or left click (right click for erasing)
         if (event.button === 0) {
             this.clicking = true;
-            //this.canvas.drawTiles(this.canvas.drawing(this.brushRadius, this.hoveredTile), this.tileSelector.selected);
+            this.tileToDraw = this.tileSelector.selected;
         } else if (event.button === 2) {
             this.rightClicking = true;
-            //this.canvas.drawTiles(this.canvas.drawing(this.brushRadius, this.hoveredTile), 0);
+            this.tileToDraw = 0;
         }
 
         if(this.tool == "paintbrush"){
-            this.paintbrushDraw();
+            this.paintbrushSelection();
         }
         else if(this.tool == "rectangle"){
             this.selectStartPoint = {
@@ -197,15 +198,12 @@ export default class User {
     }
 
     handleMouseUp(){
-    
-        console.log(this.clicking)
-        console.log(this.rightClicking)
+
         if(this.tool == "rectangle"){
             this.selectEndPoint = {
                 x: this.hoveredTile.x,
                 y: this.hoveredTile.y
             }
-            //console.log(this.selectStartPoint.x + ", " + this.selectStartPoint.y + " " + this.selectEndPoint.x + ", " + this.selectEndPoint.y);
             this.rectangleDraw();
         }
         this.clicking = false;
@@ -246,66 +244,84 @@ export default class User {
         this.canvas.rescale(this.tileSelector);
     }
 
+
+
     updateMousePos(event){
+        //store previous tile coordinates
         const prevX = this.hoveredTile.x;
         const prevY = this.hoveredTile.y
 
+        //cvs dimensions
         const cvsBoundingRect = this.canvas.dom.getBoundingClientRect();
 
         const cvsy = cvsBoundingRect.y;
         const cvsx = cvsBoundingRect.x;
 
+        //find mouse coordinates
         const x = event.clientX;
         const y = event.clientY;
 
+        //calculate new hovered tile based on mouse coordinates
         this.hoveredTile.x = Math.floor((x-cvsx)/(this.canvas.tileSize.x*Canvas.scale));
         this.hoveredTile.y = Math.floor((y-cvsy)/(this.canvas.tileSize.y*Canvas.scale)); 
         
-        //click and drag draw
+        //handle mouse position change
+        //if previous tile is not the same as current tile
         if(!((prevX === this.hoveredTile.x) && (prevY === this.hoveredTile.y))){
             this.canvas.redrawCanvas(this.tileSelector);
-
-            if(this.tool == "paintbrush" && (this.clicking || this.rightClicking)){
-                this.paintbrushDraw(this.hoveredTile)
-                this.canvas.drawCursorBox(this.brushRadius, this.hoveredTile);
-                if(this.tileSelector.selected != 0) this.canvas.drawCursorTiles(this.canvas.drawing({x : this.brushRadius, y : this.brushRadius}, this.hoveredTile), this.tileSelector);
-            }
-            if(this.tool == "rectangle"){
-                let tempEndPoint = {
-                    x: this.hoveredTile.x,
-                    y: this.hoveredTile.y
-                }
-
-                console.log(this.selectStartPoint)
-                if(this.tileSelector.selected != 0 && this.clicking){
-                    this.canvas.drawCursorTiles(this.canvas.selectTiles(
-                        {x: this.selectStartPoint.x, y: this.selectStartPoint.y}, 
-                        {x: tempEndPoint.x, y: tempEndPoint.y}), this.tileSelector);
-                }
-            }
+            this.handleTool();
         }
     }
 
-    rectangleDraw(){
+    //decide how to handle mouse updates depending on tool used
+    handleTool(){
+        switch (this.tool) {
+        case "paintbrush":
+            this.paintbrushSelection();
+            break;
+        case "rectangle":
+            this.rectangleSelection();
+            break;
+        }
+    }
+
+    paintbrushSelection(){
+        //draw tiles to canvas if user is clicking
+        if(this.clicking || this.rightClicking){
+            this.canvas.drawTiles(this.canvas.drawing({x : this.brushRadius, y : this.brushRadius}, this.hoveredTile), this.tileToDraw);
+        }
+
+        //draw white cursor box
+        this.canvas.drawCursorBox(this.brushRadius, this.hoveredTile);
+        this.canvas.drawCursorTiles(this.canvas.drawing({x : this.brushRadius, y : this.brushRadius}, this.hoveredTile), this.tileSelector);
+    }
+
+    //draw rectangle ghost tiles
+    rectangleSelection(){
+        //mouse hovered position
+        let tempHoverPoint = {
+            x: this.hoveredTile.x,
+            y: this.hoveredTile.y
+        }
+
+        //show ghost tiles when clicking and dragging
         if(this.clicking){
-            this.canvas.drawTiles(this.canvas.selectTiles(
+            this.canvas.drawCursorTiles(this.canvas.selectTiles(
                 {x: this.selectStartPoint.x, y: this.selectStartPoint.y}, 
-                {x: this.selectEndPoint.x, y: this.selectEndPoint.y}), this.tileSelector.selected);
+                {x: tempHoverPoint.x, y: tempHoverPoint.y}), this.tileSelector);
         }
-        else if(this.rightClicking){
-            this.canvas.drawTiles(this.canvas.selectTiles(
-                {x: this.selectStartPoint.x, y: this.selectStartPoint.y}, 
-                {x: this.selectEndPoint.x, y: this.selectEndPoint.y}), 0);
-        }
+    }
+
+    //draw rectangle tiles
+    rectangleDraw(){
+        this.canvas.drawTiles(this.canvas.selectTiles(
+            {x: this.selectStartPoint.x, y: this.selectStartPoint.y}, 
+            {x: this.selectEndPoint.x, y: this.selectEndPoint.y}), this.tileToDraw);
         this.canvas.redrawCanvas(this.tileSelector);
     }
 
-    paintbrushDraw(){
-        if(this.clicking){
-            this.canvas.drawTiles(this.canvas.drawing({x : this.brushRadius, y : this.brushRadius}, this.hoveredTile), this.tileSelector.selected);
-        }
-        else if(this.rightClicking){
-            this.canvas.drawTiles(this.canvas.drawing({x : this.brushRadius, y : this.brushRadius}, this.hoveredTile), 0);
-        }
+
+    clearCanvas(){
+        this.canvas.clearCanvas()
     }
 }

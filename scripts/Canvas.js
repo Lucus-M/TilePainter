@@ -80,8 +80,6 @@ export default class Canvas {
 
     drawing(tilePoints, hoveredTile){
         let drawnTiles = [];
-
-        console.log("cvs:" + tilePoints.x + ", " + tilePoints.y);
         //selection of tile coordinates based on brush radius
         for(let y = 0; y < (tilePoints.y + 1); y++){
             for(let x = 0; x < (tilePoints.x + 1); x++){
@@ -125,8 +123,6 @@ export default class Canvas {
                 drawnTiles[drawnTiles.length-1][1] = start.x + x;
             }
         }
-
-        console.log("bababa" + start)
         return drawnTiles;
     }
 
@@ -161,5 +157,14 @@ export default class Canvas {
                       this.tileSize.x*(brushRadius+1)*Canvas.scale, 
                       this.tileSize.y*(brushRadius+1)*Canvas.scale);
                       this.ctx.stroke();
+    }
+
+    clearCanvas(){
+        for(let iy = 0; iy < this.tileArray.length; iy++){
+            for(let ix = 0; ix < this.tileArray[iy].length; ix++){
+                this.tileArray[iy][ix] = 0; //initialize tile to 0 (transparent)
+            }
+        }  
+        this.redrawCanvas()
     }
 }
