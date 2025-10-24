@@ -31,6 +31,7 @@ export default class User {
             y: 0
         }
 
+        //event listeners
         this.canvas.dom.addEventListener('mousemove', this.updateMousePos.bind(this));
         this.canvas.dom.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
         this.canvas.dom.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
@@ -147,7 +148,7 @@ export default class User {
             },
             "availableTiles": [], // store base64 image data
             "tileMap": [] // store canvas tile map
-        };
+        }
     
         //store each tile index
         for (let i = 1; i < this.tileSelector.arr.length; i++) {
@@ -328,6 +329,10 @@ export default class User {
 
 
     clearCanvas(){
-        this.canvas.clearCanvas()
+        this.canvas.clearCanvas(this.tileSelector);
+    }
+
+    handleResize(width, height){
+        this.canvas.resizeCanvas(width, height, this.tileSelector);
     }
 }

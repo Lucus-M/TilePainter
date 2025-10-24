@@ -20,6 +20,32 @@ export default class Canvas {
         this.initTiles(this.dom.height / this.tileSize.y, this.dom.width / tileSize.x);    
     }
 
+    resizeCanvas(width, height, tileSelector) {
+        // resize existing array
+        this.tileArray = this.tileArray
+            .slice(0, height)
+            .map(row => row.slice(0, width));
+
+        // expand vertically
+        while (this.tileArray.length < height) {
+            const newRow = new Array(width).fill(0);
+            this.tileArray.push(newRow);
+        }
+
+        // expand horizontally
+        for (let y = 0; y < this.tileArray.length; y++) {
+            while (this.tileArray[y].length < width) {
+                this.tileArray[y].push(0);
+            }
+        }
+
+        // Resize the visual canvas
+        this.resizeCvsDom(Canvas.scale * this.tileArray[0].length, Canvas.scale * this.tileArray.length);
+        this.redrawCanvas(tileSelector);
+    }
+
+
+    //change dimensions of canvas dom element
     resizeCvsDom(width, height){
         this.dom.height = height * this.tileSize.x;
         this.dom.width = width * this.tileSize.y;
@@ -159,12 +185,12 @@ export default class Canvas {
                       this.ctx.stroke();
     }
 
-    clearCanvas(){
+    clearCanvas(tileSelector){
         for(let iy = 0; iy < this.tileArray.length; iy++){
             for(let ix = 0; ix < this.tileArray[iy].length; ix++){
                 this.tileArray[iy][ix] = 0; //initialize tile to 0 (transparent)
             }
         }  
-        this.redrawCanvas()
+        this.redrawCanvas(tileSelector)
     }
 }
