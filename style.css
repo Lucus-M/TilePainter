@@ -136,8 +136,8 @@ footer{
 
 .toolSelection > p{
     float: right;
+    user-select: none;
 }
-
 .toolSelection:hover{
     background-color: rgb(35, 35, 61);
 }
