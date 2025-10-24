@@ -20,7 +20,7 @@ export default class Canvas {
         this.initTiles(this.dom.height / this.tileSize.y, this.dom.width / tileSize.x);    
     }
 
-    resizeCvs(width, height){
+    resizeCvsDom(width, height){
         this.dom.height = height * this.tileSize.x;
         this.dom.width = width * this.tileSize.y;
     }
@@ -71,7 +71,7 @@ export default class Canvas {
     
     rescale(tileSelector){
         //resize canvas element based on scale variable
-        this.resizeCvs(Canvas.scale * this.tileArray[0].length, Canvas.scale * this.tileArray.length);
+        this.resizeCvsDom(Canvas.scale * this.tileArray[0].length, Canvas.scale * this.tileArray.length);
         
         //update scale display
         document.getElementById("scaleDisplay").innerText = "Scale = " + Canvas.scale.toFixed(1);

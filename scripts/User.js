@@ -25,6 +25,7 @@ export default class User {
 
         this.clicking = false;
         this.rightClicking = false;
+        this.mouseOnCanvas = false;
         this.hoveredTile = {
             x: 0,
             y: 0
@@ -32,6 +33,7 @@ export default class User {
 
         this.canvas.dom.addEventListener('mousemove', this.updateMousePos.bind(this));
         this.canvas.dom.addEventListener('mouseleave', this.handleMouseLeave.bind(this));
+        this.canvas.dom.addEventListener('mouseenter', this.handleMouseEnter.bind(this));
         this.canvas.dom.addEventListener('mousedown', this.handleMouseDown.bind(this));
         this.canvas.dom.addEventListener('contextmenu', this.handleContextMenu.bind(this));
 
@@ -171,7 +173,12 @@ export default class User {
     }
 
     handleMouseLeave(){
+        this.mouseOnCanvas = false;
         this.canvas.redrawCanvas(this.tileSelector);
+    }
+
+    handleMouseEnter(){
+        this.mouseOnCanvas = true;
     }
 
     handleMouseDown(event){
@@ -187,7 +194,7 @@ export default class User {
         if(this.tool == "paintbrush"){
             this.paintbrushSelection();
         }
-        else if(this.tool == "rectangle"){
+        else if(this.tool == "rectangle" && this.mouseOnCanvas){
             this.selectStartPoint = {
                 x: this.hoveredTile.x,
                 y: this.hoveredTile.y
@@ -198,8 +205,7 @@ export default class User {
     }
 
     handleMouseUp(){
-
-        if(this.tool == "rectangle"){
+        if(this.tool == "rectangle" && this.mouseOnCanvas){
             this.selectEndPoint = {
                 x: this.hoveredTile.x,
                 y: this.hoveredTile.y
