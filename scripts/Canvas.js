@@ -20,8 +20,12 @@ export default class Canvas {
         this.initTiles(this.dom.height / this.tileSize.y, this.dom.width / tileSize.x);    
     }
 
+    checkValidDimension(value){
+        return Number.isInteger(value) && value <= 128 && value > 0;
+    }
+
     resizeCanvas(width, height) {
-        if(height > 128 || width > 128 || height <= 0 || width <= 0){
+        if(!this.checkValidDimension(height) || !this.checkValidDimension(width)){
             alert("Invalid dimensions: the maximum for both height and width is 128 tiles.");
             return;
         }
