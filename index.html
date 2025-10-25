@@ -51,7 +51,24 @@
                         <img src="http://lucusdm.com/lucus/images/tiles/tileUI/trash.png">
                         <p>Delete</p>
                     </div>
+                    <br>
+
                 </span>
+            </div>
+            <div>
+                <div>
+                    <h2 style="display: inline-block">Resize</h2>
+                </div>
+
+                <!--Will make this look better l8r-->
+                <div id="resizeContainer">
+                    <label for="heightInput">Height:</label>
+                    <input type="number" id="heightInput" name="heightInput" min="1" max="128"><br>
+                    <label for="widthInput">Width:</label>
+                    <input type="number" id="widthInput" name="widthInput" min="1" max="128"><br>
+                    <p style="font-size: 13px">Max: 128x128 tiles</p>
+                    <input type="submit" id="resizeSubmit" value="Resize">
+                </div>
             </div>
         </div>
 
@@ -97,10 +114,9 @@
 
     <footer>
         <p style="display: inline-block;">&copy; 
-            <a href="http://www.lucusdm.com/lucus" target="_blank">Lucus M</a>, 2025 - Ver 2003251942 - 
+            <a href="http://www.lucusdm.com/lucus" target="_blank">Lucus M</a>, 2025 -  
         </p>
         <a href="https://github.com/Lucus-M/TilePainter" target="_blank">GitHub</a>
-
         <p id="scaleDisplay" style="float:right;">Scale = 1.0</p>
     </footer>
     <script type="module" src="scripts/main.js"></script>
