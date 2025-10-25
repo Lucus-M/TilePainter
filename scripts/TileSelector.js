@@ -1,4 +1,4 @@
-export default class TileSelector {
+export default class FileHandler {
     
     constructor(){
         this.arr = [];
