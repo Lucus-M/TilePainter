@@ -1,22 +1,27 @@
 import Canvas from './Canvas.js';
 import TileSelector from './TileSelector.js';
+import EventBinder from './events/EventBinder.js';
+
 import FileHandler from './events/FileHandler.js';
 import MouseHandler from './events/MouseHandler.js';
-import EventBinder from './events/EventBinder.js';
+import OptionHandler from './events/OptionHandler.js';
 
 export default class User {
     
     constructor(){
-
         //initialize canvas
-        //                       name           tile size
-        this.canvas = new Canvas("mainCanvas", {x: 16, y: 16});
+        //                              name           tile size
         this.tileSelector = new TileSelector();
-        this.fileHandler = new FileHandler(this.canvas, this.tileSelector)
+        this.canvas = new Canvas(this, "mainCanvas", {x: 16, y: 16});
+        this.fileHandler = new FileHandler(this)
         this.mouseHandler = new MouseHandler(this);
+        this.optionHandler = new OptionHandler(this);
 
+        //load sample tiles when page loads
         this.tileSelector.loadSampleTiles();
-        this.brushRadius; 
+
+        //init brush radius
+        this.brushRadius = 0; 
         this.setBrushRadius();
         this.tileToDraw = 0;
 
@@ -51,17 +56,11 @@ export default class User {
         //scaling using + and -
         if (event.key === "=" && Canvas.scale <= 3) {
             Canvas.scale += 0.1;
-            this.canvas.rescale(this.tileSelector);
+            this.canvas.rescale();
         } else if (event.key === "-" && Canvas.scale > 0.2) {
             Canvas.scale -= 0.1;
-            this.canvas.rescale(this.tileSelector);
+            this.canvas.rescale();
         }
-    }
-
-
-    //resize canvas
-    handleResize(width, height){
-        this.canvas.resizeCanvas(width, height, this.tileSelector);
     }
 
     //decide how to handle mouse updates depending on tool used
@@ -84,7 +83,7 @@ export default class User {
 
         //draw white cursor box
         this.canvas.drawCursorBox(this.brushRadius, this.hoveredTile);
-        this.canvas.drawCursorTiles(this.canvas.drawing({x : this.brushRadius, y : this.brushRadius}, this.hoveredTile), this.tileSelector);
+        this.canvas.drawCursorTiles(this.canvas.drawing({x : this.brushRadius, y : this.brushRadius}, this.hoveredTile));
     }
 
     //draw rectangle ghost tiles
@@ -99,7 +98,7 @@ export default class User {
         if(this.clicking){
             this.canvas.drawCursorTiles(this.canvas.selectTiles(
                 {x: this.selectStartPoint.x, y: this.selectStartPoint.y}, 
-                {x: tempHoverPoint.x, y: tempHoverPoint.y}), this.tileSelector);
+                {x: tempHoverPoint.x, y: tempHoverPoint.y}));
         }
     }
 
@@ -108,10 +107,10 @@ export default class User {
         this.canvas.drawTiles(this.canvas.selectTiles(
             {x: this.selectStartPoint.x, y: this.selectStartPoint.y}, 
             {x: this.selectEndPoint.x, y: this.selectEndPoint.y}), this.tileToDraw);
-        this.canvas.redrawCanvas(this.tileSelector);
+        this.canvas.redrawCanvas();
     }
 
     clearCanvas(){
-        this.canvas.clearCanvas(this.tileSelector);
+        this.canvas.clearCanvas();
     }
 }

@@ -4,7 +4,7 @@ export default class EventBinder {
     }
 
     bindEvents() {
-        const { mouseHandler, fileHandler, canvas } = this.user;
+        const { mouseHandler, fileHandler, canvas, optionHandler } = this.user;
 
         // mouse
         canvas.dom.addEventListener('mousemove', mouseHandler.updateMousePos.bind(mouseHandler));
@@ -20,6 +20,10 @@ export default class EventBinder {
 
         // brush size input
         document.getElementById("brushSize").addEventListener("input", this.user.setBrushRadius.bind(this.user));
+
+        //options menu
+        document.getElementById("resizeSubmit").addEventListener("click", optionHandler.clickResize.bind(optionHandler))
+
 
         // file input/output
         document.getElementById("imageUpload").addEventListener("change", fileHandler.handleImageUploadChange.bind(fileHandler));

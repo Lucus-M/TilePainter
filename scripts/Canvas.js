@@ -2,14 +2,14 @@ export default class Canvas {
     static ctxMenuAllowed = false;
     static scale = 1;
 
-    constructor(id, tileSize){        
+    constructor(user, id, tileSize){        
+        this.user = user;
+        this.tileSelector = user.tileSelector;
+
         this.id = id; //canvas dom element ID
         this.dom = document.getElementById(this.id); //canvas dom element
         this.ctx = this.dom.getContext("2d"); //2d context
 
-        //dimensions of canvas
-        this.height = 0;
-        this.width = 0;
         //initialize canvas dimensions
 
         //size of each tile
@@ -20,7 +20,12 @@ export default class Canvas {
         this.initTiles(this.dom.height / this.tileSize.y, this.dom.width / tileSize.x);    
     }
 
-    resizeCanvas(width, height, tileSelector) {
+    resizeCanvas(width, height) {
+        if(height > 128 || width > 128 || height <= 0 || width <= 0){
+            alert("Invalid dimensions: the maximum for both height and width is 128 tiles.");
+            return;
+        }
+
         // resize existing array
         this.tileArray = this.tileArray
             .slice(0, height)
@@ -41,7 +46,7 @@ export default class Canvas {
 
         // Resize the visual canvas
         this.resizeCvsDom(Canvas.scale * this.tileArray[0].length, Canvas.scale * this.tileArray.length);
-        this.redrawCanvas(tileSelector);
+        this.redrawCanvas();
     }
 
 
@@ -73,7 +78,7 @@ export default class Canvas {
         }
     }
 
-    redrawCanvas(tileSelector){
+    redrawCanvas(){
         this.ctx.imageSmoothingEnabled = false; //prevent lower res images from becoming blurry when scaled up
         this.ctx.clearRect(0, 0, this.dom.width, this.dom.height); //clear canvas
 
@@ -83,7 +88,7 @@ export default class Canvas {
                 //0 is transparent
                 if(this.tileArray[iy][ix] != 0){
                     //draw tile images             
-                    this.ctx.drawImage(tileSelector.arr[this.tileArray[iy][ix]].img, 
+                    this.ctx.drawImage(this.tileSelector.arr[this.tileArray[iy][ix]].img, 
                                 //positioning * scale
                                 (ix*this.tileSize.x) * Canvas.scale, 
                                 (iy*this.tileSize.y) * Canvas.scale,
@@ -95,13 +100,13 @@ export default class Canvas {
         }
     }
     
-    rescale(tileSelector){
+    rescale(){
         //resize canvas element based on scale variable
         this.resizeCvsDom(Canvas.scale * this.tileArray[0].length, Canvas.scale * this.tileArray.length);
         
         //update scale display
         document.getElementById("scaleDisplay").innerText = "Scale = " + Canvas.scale.toFixed(1);
-        this.redrawCanvas(tileSelector);
+        this.redrawCanvas();
     }
 
     drawing(tilePoints, hoveredTile){
@@ -164,7 +169,9 @@ export default class Canvas {
         }
     }
 
-    drawCursorTiles(tiles, tileSelector){
+    drawCursorTiles(tiles){
+        const tileSelector = this.tileSelector;
+
         for(let i = 0; i < tiles.length; i++){
             this.ctx.drawImage(tileSelector.arr[tileSelector.selected].img, 
                           tiles[i][1]*this.tileSize.x*Canvas.scale, 
@@ -185,12 +192,12 @@ export default class Canvas {
                       this.ctx.stroke();
     }
 
-    clearCanvas(tileSelector){
+    clearCanvas(){
         for(let iy = 0; iy < this.tileArray.length; iy++){
             for(let ix = 0; ix < this.tileArray[iy].length; ix++){
                 this.tileArray[iy][ix] = 0; //initialize tile to 0 (transparent)
             }
         }  
-        this.redrawCanvas(tileSelector)
+        this.redrawCanvas()
     }
 }

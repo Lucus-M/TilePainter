@@ -1,7 +1,8 @@
 export default class FileHandler{
-    constructor(canvas, tileSelector) {
-        this.tileSelector = tileSelector;
-        this.canvas = canvas;
+    constructor(user) {
+        this.user = user;
+        this.tileSelector = user.tileSelector;
+        this.canvas = user.canvas;
     }
 
     handleImageUploadChange(event) {
