@@ -1,4 +1,4 @@
-export default class FileHandler {
+export default class TileSelector {
     
     constructor(){
         this.arr = [];
@@ -21,7 +21,9 @@ export default class FileHandler {
         this.arr[cur].element.innerHTML = "<img src='" + 
                                             this.arr[cur].img.src + 
                                             "'>";
-        document.getElementById("tileSelector").appendChild(this.arr[cur].element);
+        if(document.getElementById("tileSelector")){
+            document.getElementById("tileSelector").appendChild(this.arr[cur].element);
+        }
     }
 
     loadSampleTiles() {
@@ -29,7 +31,7 @@ export default class FileHandler {
 
         for(let i = 0; i <= amount; i++){
             // Fetch the sample tile images and store them as base 64 data
-            fetch("http://www.lucusdm.com/lucus/images/tiles/sampleTiles/"+ i +".png")
+            fetch("https://www.lucusdm.com/lucus/images/tiles/sampleTiles/"+ i +".png")
                 .then(response => response.blob()) 
                 .then(blob => {
                     this.uploadImage(blob);
@@ -67,7 +69,7 @@ export default class FileHandler {
         //Init transparent tile
         this.arr = [];
         let transparentImg = new Image();
-        transparentImg.src = "http://www.lucusdm.com/lucus/images/tiles/tileUI/transparentbg.png";
+        transparentImg.src = "https://www.lucusdm.com/lucus/images/tiles/tileUI/transparentbg.png";
         this.addNewTile(transparentImg);
 
         this.selected = 0;
