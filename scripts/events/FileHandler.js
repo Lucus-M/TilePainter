@@ -1,8 +1,7 @@
 export default class FileHandler{
-    constructor(user) {
-        this.user = user;
-        this.tileSelector = user.tileSelector;
-        this.canvas = user.canvas;
+    constructor(tileSelector, canvas) {
+        this.tileSelector = tileSelector;
+        this.canvas = canvas;
     }
 
     handleImageUploadChange(event) {
@@ -58,53 +57,55 @@ export default class FileHandler{
             const reader = new FileReader();
             
             reader.onload = (e) => {
-                    //parse json file content
-                    const jsonContent = JSON.parse(e.target.result);
-    
-                    //read tile size from json
-                    this.canvas.tileSize.x = jsonContent.tileSize.x;
-                    this.canvas.tileSize.y = jsonContent.tileSize.y;
-    
-                    // reset tile selection
-                    this.tileSelector.selectTile(0); //select tile 0 (transparent)
-    
-                    //remove all tile elements & event listeners
-                    document.querySelectorAll('.tile').forEach(element => {
-                        element.remove();
-                    });
-    
-                    //new tile selector array
-                    this.tileSelector.resetArray();
-                    let loaded = 0;
-                    //load new tiles from JSON
-                    for (let i = 0; i < jsonContent.availableTiles.length; i++) {
-                        const tileImage = new Image();
-                        //read image data as base64
-                        tileImage.src = jsonContent.availableTiles[i];
-
-                        this.tileSelector.addNewTile(tileImage);
-
-                        tileImage.onload = () =>{
-                            loaded++;
-                        }
-                    }
-    
-                    //load tile map
-                    this.canvas.tileArray = jsonContent.tileMap;
-    
-                    //rescale & draw new canvas when data is loaded
-                    let checkloaded = setInterval(() => {
-                        if(loaded == jsonContent.availableTiles.length){
-                            this.canvas.rescale(this.tileSelector);
-                            clearInterval(checkloaded);
-                        }
-                    }, 50)
-                
+                //parse json file content
+                const jsonContent = JSON.parse(e.target.result);
+                this.loadFromJson(jsonContent);
             };
             reader.readAsText(file);
         } else {
             alert("Please upload a valid JSON file.");
         }
+    }
+
+    loadFromJson(jsonContent){
+        //read tile size from json
+        this.canvas.tileSize.x = jsonContent.tileSize.x;
+        this.canvas.tileSize.y = jsonContent.tileSize.y;
+
+        // reset tile selection
+        this.tileSelector.selectTile(0); //select tile 0 (transparent)
+
+        //remove all tile elements & event listeners
+        document.querySelectorAll('.tile').forEach(element => {
+            element.remove();
+        });
+
+        //new tile selector array
+        this.tileSelector.resetArray();
+        let loaded = 0;
+        //load new tiles from JSON
+        for (let i = 0; i < jsonContent.availableTiles.length; i++) {
+            const tileImage = new Image();
+            //read image data as base64
+            tileImage.src = jsonContent.availableTiles[i];
+
+            this.tileSelector.addNewTile(tileImage);
+
+            tileImage.onload = () =>{
+                loaded++;
+            }
+        }
+
+        //load tile map
+        this.canvas.tileArray = jsonContent.tileMap;
+
+        //rescale & draw new canvas when data is loaded
+        let checkloaded = setInterval(() => {
+            if(loaded == jsonContent.availableTiles.length){
+                this.canvas.rescale(this.tileSelector);
+                clearInterval(checkloaded);
+            }
+        }, 50)
     }
 
     handleDownloadSheetButtonClick(event) {

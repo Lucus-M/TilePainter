@@ -12,8 +12,8 @@ export default class User {
         //initialize canvas
         //                              name           tile size
         this.tileSelector = new TileSelector();
-        this.canvas = new Canvas(this, "mainCanvas", {x: 16, y: 16});
-        this.fileHandler = new FileHandler(this)
+        this.canvas = new Canvas(this.tileSelector, "mainCanvas", {x: 16, y: 16});
+        this.fileHandler = new FileHandler(this.tileSelector, this.canvas)
         this.mouseHandler = new MouseHandler(this);
         this.optionHandler = new OptionHandler(this);
 

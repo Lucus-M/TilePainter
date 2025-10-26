@@ -2,23 +2,30 @@ export default class Canvas {
     static ctxMenuAllowed = false;
     static scale = 1;
 
-    constructor(user, id, tileSize){        
-        this.user = user;
-        this.tileSelector = user.tileSelector;
+   constructor(tileSelector, id, tileSize) {        
+        this.tileSelector = tileSelector;
 
-        this.id = id; //canvas dom element ID
-        this.dom = document.getElementById(this.id); //canvas dom element
-        this.ctx = this.dom.getContext("2d"); //2d context
+        this.id = id; // canvas DOM element ID
+        this.dom = document.getElementById(this.id); // canvas DOM element
+        this.ctx = this.dom.getContext("2d"); // 2D context
 
-        //initialize canvas dimensions
+        // size of each tile
+        this.tileSize = { 
+            x: tileSize.x, 
+            y: tileSize.y 
+        };
 
-        //size of each tile
-        this.tileSize = tileSize;
+        // initialize canvas dimensions
         this.initCvsSize();
 
-        this.tileArray;
-        this.initTiles(this.dom.height / this.tileSize.y, this.dom.width / tileSize.x);    
+        // initialize tile array
+        const tileHeight = Math.floor(this.dom.height / this.tileSize.y);
+        const tileWidth  = Math.floor(this.dom.width  / this.tileSize.x);
+
+        this.tileArray = [];
+        this.initTiles(tileHeight, tileWidth);
     }
+
 
     checkValidDimension(value){
         return Number.isInteger(value) && value <= 128 && value > 0;
@@ -56,8 +63,8 @@ export default class Canvas {
 
     //change dimensions of canvas dom element
     resizeCvsDom(width, height){
-        this.dom.height = height * this.tileSize.x;
-        this.dom.width = width * this.tileSize.y;
+        this.dom.height = height * this.tileSize.y;
+        this.dom.width = width * this.tileSize.x;
     }
 
     initCvsSize(){
