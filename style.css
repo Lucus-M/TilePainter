@@ -140,6 +140,22 @@ footer{
     border: 3px solid white;
 }
 
+#projectInfo{
+    padding: 0.2em;
+    text-align: center;
+}
+
+#projectInfo > input {
+    color: white;
+    background-color: rgb(39, 38, 52);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border: 0px;
+    border-radius: 0.2em;
+    padding: 0.1em;
+    width: 80%;
+    font-size: 20px;
+}
+
 .optionButton{
     overflow: hidden; 
     width: 32px;
@@ -148,9 +164,27 @@ footer{
     display: inline-block;
 }
 
-.optionButton:hover{
+.option{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.5em 0.5em 0.3em 0.4em;
+    border-radius: 3px;
+    display: block;
+    user-select: none;
+}
+
+.option > h4{
+    margin-top: 0.35em;
+    float: right;
+}
+
+.optionButton:hover, .option:hover{
     cursor: pointer;
     background-color: rgb(61, 49, 73)
+}
+
+.option:active{
+    background-color: rgb(104, 82, 125)
 }
 
 .optionButton > img:active{

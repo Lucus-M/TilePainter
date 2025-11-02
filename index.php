@@ -108,18 +108,25 @@
             <!--file tab-->
             <div class="sideBar tab" id="fileTab">
                 <div>
-                    <div id="saveToSerer" class="optionButton">
-                        <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/floppySave.png" alt="save to account">
+                    <div id="projectInfo">
+                        <input type="text" id="projectNameInput" name="projectNameInput" value="Project Name">
                     </div>
-                    <div id="uploadSheetButton" class="optionButton" onclick="document.getElementById('jsonUpload').click()">
+                    <div id="saveToSerer" class="option">
+                        <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/floppySave.png" alt="save to account">
+                        <h4>Save Project</h4>
+                    </div>
+                    <div id="uploadSheetButton" class="option" onclick="document.getElementById('jsonUpload').click()">
                         <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/uploadtileset.png" alt="upload project json">
+                        <h4>Upload JSON Sheet</h4>
                     </div>
                     <input style="display: none;" type="file" id="jsonUpload" accept=".json">
-                    <div id="downloadSheetButton" class="optionButton">
+                    <div id="downloadSheetButton" class="option">
                         <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/downloadtileset.png" alt="download project json">
+                        <h4>Dowload JSON Sheet</h4>
                     </div>
-                    <div id="downloadImage" class="optionButton">
+                    <div id="downloadImage" class="option">
                         <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/downloadImage.png" alt="download as image">
+                        <h4>Download PNG</h4>
                     </div>
                 </div>
             </div>
@@ -216,9 +223,12 @@
         let userId = <?= json_encode($userId) ?>;
         let userName = <?= json_encode($userName) ?>;
         let projId = getCookie("projId");
+        let projName = getCookie("projName");
 
         deleteCookie("projId");
+        deleteCookie("projName");
 
+        document.getElementById("projectNameInput").value = projName;
     </script>
     <script type="module" src="scripts/main.js"></script>
     

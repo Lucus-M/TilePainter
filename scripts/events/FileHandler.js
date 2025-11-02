@@ -139,21 +139,22 @@ export default class FileHandler{
 
     handleDownloadSheetButtonClick() {
         const jsonData = this.createJson();
-    
+        const projectName = document.getElementById("projectNameInput").value;
+
         //create and download JSON project file
         const blob = new Blob([JSON.stringify(jsonData)], {type: 'application/json'});
     
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'tilemap.json';
+        link.download = `${projectName}.json`;
     
         link.click();
     }
 
     async saveJsonDataToServer(){
-        const jsonData = this.createJson();
+        const projectName = document.getElementById("projectNameInput").value;
 
-        await fetch("../community/handleFiles/saveProject.php", {
+        await fetch(`../community/handleFiles/saveProject.php?projName=${projectName}&projId=${projId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -163,7 +164,7 @@ export default class FileHandler{
         .then(res => res.text())
         .then(result => {
             if(result == "Not logged in"){
-                console.log(result);
+                alert(result);
                 return;
             }
             window.open(`../community/testpage.php?user=${userName}`, "_blank");
