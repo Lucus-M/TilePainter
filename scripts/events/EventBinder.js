@@ -30,5 +30,8 @@ export default class EventBinder {
         document.getElementById("jsonUpload").addEventListener("change", fileHandler.handleJsonUploadChange.bind(fileHandler));
         document.getElementById("downloadSheetButton").addEventListener("click", fileHandler.handleDownloadSheetButtonClick.bind(fileHandler));
         document.getElementById("downloadImage").addEventListener("click", fileHandler.handleDownloadImageButtonClick.bind(fileHandler));
+
+        //save project to server
+        document.getElementById("saveToSerer").addEventListener("click", fileHandler.saveJsonDataToServer.bind(fileHandler));
     }
 }

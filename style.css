@@ -43,19 +43,54 @@ footer{
 
 #mainCanvas{
     background-color: gray;
-    background-image: url("http://www.lucusdm.com/lucus/images/tiles/tileUI/transparentbg.png");
+    background-image: url("https://www.lucusdm.com/lucus/images/tiles/tileUI/transparentbg.png");
     image-rendering: crisp-edges;
     image-rendering: pixelated;
     position: absolute;
 }
 
-.tileSelectorSidebar{
+.sideBar{
     background-color:rgb(20, 20, 37);
     margin-left: auto;
-    width: 13.5em;
+    width: 15.5em;
     height: 100%;
     display: flex;
     flex-flow: column;
+}
+
+#tabSelect{
+    width: 100%;
+    background-color: rgb(38, 24, 56);
+    user-select: none;
+    border-bottom: 1px solid white;
+}
+
+.tabSelection{
+    display: inline-block;
+    width: 4.5em;
+    border: 1px solid transparent;
+    border-bottom: 0px;
+    margin-top: 0.1em;
+    margin-right: 0.1em;
+    margin-left: 0.1em;
+    text-align: center;
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+}
+
+.tabSelection.selected, .tabSelection:hover{
+    background-color: rgb(20, 20, 37);
+    border-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(20, 20, 37);
+    cursor: pointer;
+}
+
+.tab{
+    display: none;
+}
+
+.tab.selected{
+    display: flex;
 }
 
 #tileSelectorContainer{
@@ -72,10 +107,6 @@ footer{
     border-radius: 3px;
     height: 100%;
     font-size: 0;
-}
-
-#uploadButton{
-    float: right;
 }
 
 .tile{
@@ -119,6 +150,7 @@ footer{
 
 .optionButton:hover{
     cursor: pointer;
+    background-color: rgb(61, 49, 73)
 }
 
 .optionButton > img:active{

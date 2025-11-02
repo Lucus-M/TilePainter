@@ -18,7 +18,6 @@ export default class User {
         this.optionHandler = new OptionHandler(this);
 
         //load sample tiles when page loads
-        this.tileSelector.loadSampleTiles();
 
         //init brush radius
         this.brushRadius = 0; 

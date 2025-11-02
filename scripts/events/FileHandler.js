@@ -37,19 +37,6 @@ export default class FileHandler{
         link.click();
     }
 
-    handleDownloadImageButtonClick(event) {
-        //redraw before downloading
-        this.canvas.redrawCanvas(this.tileSelector);
-    
-        //download image drawn as png
-        const dataURL = this.canvas.dom.toDataURL('image/png');
-    
-        const link = document.createElement('a');
-        link.href = dataURL;
-        link.download = 'drawing.png';
-        link.click();
-    }
-
     handleJsonUploadChange(event) {
         const file = event.target.files[0];
     
@@ -64,6 +51,21 @@ export default class FileHandler{
             reader.readAsText(file);
         } else {
             alert("Please upload a valid JSON file.");
+        }
+    }
+
+    async loadJsonFromServer(filePath) {
+        try {
+            const response = await fetch(filePath);
+            if (!response.ok) {
+                throw new Error(`Failed to load ${filePath}: ${response.status}`);
+            }
+
+            const jsonContent = await response.json();
+            this.loadFromJson(jsonContent);
+        } catch (err) {
+            console.error("Error loading JSON:", err);
+            alert("Failed to load project file.");
         }
     }
 
@@ -108,7 +110,7 @@ export default class FileHandler{
         }, 50)
     }
 
-    handleDownloadSheetButtonClick(event) {
+    createJson(){
         const jsonData = {
             //size of each tile
             "tileSize": {
@@ -131,6 +133,12 @@ export default class FileHandler{
                 jsonData.tileMap[y].push(this.canvas.tileArray[y][x]);
             }
         }
+
+        return jsonData;
+    }
+
+    handleDownloadSheetButtonClick() {
+        const jsonData = this.createJson();
     
         //create and download JSON project file
         const blob = new Blob([JSON.stringify(jsonData)], {type: 'application/json'});
@@ -140,5 +148,29 @@ export default class FileHandler{
         link.download = 'tilemap.json';
     
         link.click();
+    }
+
+    async saveJsonDataToServer(){
+        const jsonData = this.createJson();
+
+        await fetch("../community/handleFiles/saveProject.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.createJson())
+        })
+        .then(res => res.text())
+        .then(result => {
+            if(result == "Not logged in"){
+                console.log(result);
+                return;
+            }
+            window.open(`../community/testpage.php?user=${userName}`, "_blank");
+        })
+        .catch(err => {
+            console.error("Error saving project:", err);
+        });
+
     }
 }
