@@ -22,8 +22,8 @@ export default class EventBinder {
         document.getElementById("brushSize").addEventListener("input", this.user.setBrushRadius.bind(this.user));
 
         //options menu
-        document.getElementById("resizeSubmit").addEventListener("click", optionHandler.clickResize.bind(optionHandler))
-
+        document.getElementById("resizeSubmit").addEventListener("click", optionHandler.clickResize.bind(optionHandler));
+        document.getElementById("tileResizeSubmit").addEventListener("click", optionHandler.clickTileResize.bind(optionHandler));
 
         // file input/output
         document.getElementById("imageUpload").addEventListener("change", fileHandler.handleImageUploadChange.bind(fileHandler));

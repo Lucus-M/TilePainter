@@ -1,14 +1,8 @@
 <?php
-    session_start(); 
-
-    //initialize user logged in
-    $userId = null;
-    $userName = null;
-
-    if (isset($_SESSION["user_id"]) && isset($_SESSION["username"])) {
-        $userId = $_SESSION["user_id"];
-        $userName = $_SESSION["username"];
-    }
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Pragma: no-cache");
+    
+    $projId = $_GET["proj_id"] ?? "";
 ?>
 
 <!DOCTYPE html>
@@ -17,14 +11,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="https://www.lucusdm.com/lucus/images/tiles/pointerLogo.ico">
+    <link rel="icon" type="image/x-icon" href="../images/tiles/pointerLogo.png">
     <title>TilePainter</title>
 </head>
+
 <body>
-    <header>
-        <h1 style="display: inline-block">TilePainter</h1>
-        <h3 style="float: right; display: inline-block">User: <span id="usernameDisplay">Logged Out</span></h3>
-    </header>
+    <?php include "./pageElements/navbar.php"; ?>
+
     <section id="UIScreen">
         <div class="sideBar" id="tools">
             <div id="toolSelectorContainer">
@@ -135,7 +128,7 @@
             <div class="sideBar tab" id="optionTab">
                 <div>
                     <div>
-                        <h2 style="display: inline-block">Resize</h2>
+                        <h2 style="display: inline-block">Resize Canvas</h2>
                     </div>
 
                     <!--Will make this look better l8r-->
@@ -147,13 +140,22 @@
                         <p style="font-size: 13px">Max: 128x128 tiles</p>
                         <input type="submit" id="resizeSubmit" value="Resize">
                     </div>
+
+                    <div>
+                        <h2 style="display: inline-block">Tile Size</h2>
+                    </div>
+
+                    <div id="tileSizeContainer">
+                        <label for="heightInput">Height:</label>
+                        <input type="number" id="tileHeightInput" name="tileHeightInput" min="1" max="64"><br>
+                        <label for="tileHeightInput">Width:</label>
+                        <input type="number" id="tileWidthInput" name="tileWidthInput" min="1" max="64"><br>
+                        <p style="font-size: 13px">Max: 64 x 64 px</p>
+                        <input type="submit" id="tileResizeSubmit" value="Resize">
+                    </div>
                 </div>
             </div>
-
-            
         </div>
-
-        
     </section>
 
     <footer>
@@ -206,29 +208,16 @@
             });
         });
 
-        //get js cookie
-        function getCookie(name) {
-            const cookies = document.cookie.split('; ');
-            for (let cookie of cookies) {
-                const [key, value] = cookie.split('=');
-                if (key === name) return decodeURIComponent(value);
-            }
-            return null; // if not found
+        let projId = <?= json_encode($projId) ?>;
+
+        if(!userId){
+            projId = null;
+            projName = null;
+        }
+        else{
+            document.getElementById("usernameDisplay").innerText = userName;
         }
 
-        function deleteCookie(name) {
-            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
-        }
-
-        let userId = <?= json_encode($userId) ?>;
-        let userName = <?= json_encode($userName) ?>;
-        let projId = getCookie("projId");
-        let projName = getCookie("projName");
-
-        deleteCookie("projId");
-        deleteCookie("projName");
-
-        document.getElementById("projectNameInput").value = projName;
     </script>
     <script type="module" src="scripts/main.js"></script>
     

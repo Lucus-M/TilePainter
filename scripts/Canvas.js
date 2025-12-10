@@ -60,6 +60,22 @@ export default class Canvas {
         this.redrawCanvas();
     }
 
+    checkValidTileDimension(value){
+        return Number.isInteger(value) && value <= 128 && value > 0;
+    }
+
+    resizeTiles(width, height){
+        if(!this.checkValidTileDimension(height) || !this.checkValidTileDimension(width)){
+            alert("Invalid dimensions: the maximum for both height and width is 64px.");
+            return;
+        }
+
+        this.tileSize.x = width;
+        this.tileSize.y = height;
+
+        this.resizeCanvas(this.tileArray[0].length, this.tileArray.length);
+    }
+
 
     //change dimensions of canvas dom element
     resizeCvsDom(width, height){
@@ -69,8 +85,8 @@ export default class Canvas {
 
     initCvsSize(){
         //cet canvas container element's dimensions
-        let containerWidth = document.getElementById("canvasContainer").offsetWidth;
-        let containerHeight = document.getElementById("canvasContainer").offsetHeight;
+        let containerWidth = this.dom.parentElement.offsetWidth;
+        let containerHeight = this.dom.parentElement.offsetHeight;
 
         //set canvas width to however many full tiles can fit within the canvas container
         this.dom.width = containerWidth - (containerWidth % this.tileSize.x);

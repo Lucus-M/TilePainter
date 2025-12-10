@@ -65,7 +65,6 @@ export default class FileHandler{
             this.loadFromJson(jsonContent);
         } catch (err) {
             console.error("Error loading JSON:", err);
-            alert("Failed to load project file.");
         }
     }
 
@@ -137,9 +136,13 @@ export default class FileHandler{
         return jsonData;
     }
 
-    handleDownloadSheetButtonClick() {
+    handleDownloadSheetButtonClick(){
+        this.downloadSheet(document.getElementById("projectNameInput").value);
+    }
+
+    downloadSheet(name){
         const jsonData = this.createJson();
-        const projectName = document.getElementById("projectNameInput").value;
+        const projectName = name;
 
         //create and download JSON project file
         const blob = new Blob([JSON.stringify(jsonData)], {type: 'application/json'});
@@ -163,11 +166,13 @@ export default class FileHandler{
         })
         .then(res => res.text())
         .then(result => {
-            if(result == "Not logged in"){
+
+            if(result !== "success"){
                 alert(result);
-                return;
             }
-            window.open(`../community/testpage.php?user=${userName}`, "_blank");
+            else{
+                window.location.href = `../community/gallery.php?user=${userId}`;
+            }
         })
         .catch(err => {
             console.error("Error saving project:", err);
