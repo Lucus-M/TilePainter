@@ -12,6 +12,9 @@
         $userId = $_SESSION["user_id"];
         $userName = $_SESSION["username"];
     }
+
+    $createUrl = "https://www.lucusdm.com/lucus/tilesDev/create";
+    $communityUrl = "https://www.lucusdm.com/lucus/tilesDev/community";
 ?>
 
 <header>
@@ -54,24 +57,24 @@
         }
     </style>
     <div id="titleDisplay" style="display: inline-block">
-        <a href="../tilesDev">
-            <img src="../images/tiles/tileUI/tilePainterLogo.png" style="height: 32px;">
+        <a href="<?= $createUrl ?>">
+            <img src="../../images/tiles/tileUI/tilePainterLogo.png" style="height: 32px;">
         </a>
     </div>
 
     <nav style="float: right; display: flex;">
-        <a href="../tilesDev">
+        <a href="<?= $createUrl ?>">
             <div class="navlink">
                 <p>Create</p>
             </div>
         </a>
-        <a href="../community">
+        <a href="<?= $communityUrl ?>">
             <div class="navlink">
                 <p>Explore</p>
             </div>
         </a>
         <div class="userButton" id="userClick">
-            <img id="pfp" src="../images/tiles/profilePics/default_pfp.png">
+            <img id="pfp" src="../../images/tiles/profilePics/default_pfp.png">
             <p>
                 <span id="usernameDisplay">
                     <a href="../community/login.php">Log In</a>
@@ -81,8 +84,8 @@
 
         <div id="dropdown">
             <ul>
-                <a href="../community/gallery.php?user=<?= $userId ?>"><li>My Gallery</li></a>
-                <a href="../community/logout.php"><li>Log Out</li></a>
+                <a href="<?= $communityUrl ?>/gallery.php?user=<?= $userId ?>"><li>My Gallery</li></a>
+                <a href="<?= $communityUrl ?>/logout.php"><li>Log Out</li></a>
             </ul>
         </div>
     </nav>

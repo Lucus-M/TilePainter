@@ -1,0 +1,251 @@
+*{
+    margin: 0;
+    padding: 0;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    box-sizing: border-box;
+}
+
+
+html, body{
+    background-color: rgb(12, 11, 24);
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-flow: column;
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+}
+
+body{
+    background-image: url("../../images/tiles/backgrounds/scroll.png");
+}
+
+#hoverLabel{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.2em;
+    border: 2px solid white;
+    border-radius: 0.2em;
+    background-color: black;
+    display: none;
+    z-index: 99999;
+}
+
+#loadingOverlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+h2{
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+header{    
+    height: 32px;
+    flex: 0 1 auto;
+    background-color: #1C1C29;
+    font-size: 1.3em;
+}
+
+.userButton, #projUserDisplay, .commentUserDisplay{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#projUserDisplay, .commentUserDisplay{
+    border-radius: 0em 0.4em 0.4em 0em;
+}
+
+.userButton{
+    border-radius: 5px;
+}
+
+.userButton > p, #projUserDisplay > p, .commentUserDisplay > p{
+    margin: 0px 5px 0px 5px;
+}
+
+.userButton, #projUserDisplay:hover, .commentUserDisplay:hover{
+    background-color: rgb(61, 49, 73)
+}
+
+.userButton:active, #projUserDisplay:active, .commentUserDisplay:active{
+    background-color: rgb(104, 82, 125)
+}
+
+#projUserDisplay, .commentUserDisplay{
+    width: fit-content;
+}
+
+.form{
+    margin: auto;
+    padding: 0em 4em 3em 4em;
+    border-radius: 5em;
+    background-color: rgb(12, 11, 24);
+}
+
+.fitContent{
+    width: fit-content;
+}
+
+.galleryScreen, .viewProjScreen, .homeScreen{
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 0;
+    font-size: 20px;
+}
+
+.galleryScreen, .homeScreen {
+    width: 95%;
+    padding: 0em 2em;
+}
+
+.viewProjScreen{
+    width: 98%;
+}
+
+#projectList > #canvasContainer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: center;
+    */
+}
+
+#buttonsContainer{
+    position: relative;
+}
+
+#projButtons{
+    position: absolute;
+    display: none;
+    top:0; 
+    left:0;
+}
+
+.option{
+    background-color: rgb(12, 11, 24);
+    height: 48px;
+    width: 48px;
+    margin: 3px;
+    overflow: hidden;
+    box-sizing: content-box;
+    border: 2px solid white;
+    border-radius: 0.3em;
+    cursor: pointer;
+    user-select: none;
+}
+
+.option:hover{
+    background-color: #353549;
+}
+
+.option:active{
+    background-color: #69697a;
+}
+
+.option > img{
+    height: 100%;
+}
+
+.showProj{
+    width: 100%;
+    height: 75vh;
+    margin: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+}
+
+.showProj > canvas{
+    flex-shrink: 0;
+
+    /*cvs is centered when it is smaller than container to prevent top left going into negative space*/
+    margin: auto;             
+    cursor: auto;
+
+    min-width: 0px;
+}
+
+canvas{
+    background-image: url("../../images/tiles/tileUI/transparentbg.png");
+}
+
+#projNameDisplay{
+    font-size: 45px;
+}
+
+#projectList > #canvasContainer > canvas{
+    background-image: url("../../images/tiles/tileUI/transparentbg.png");
+    margin: 5px;
+    min-width: 32px;
+    height: 20vh;
+    cursor: pointer;
+}
+
+#commentSection{
+    width: 50vw;
+    overflow: auto;
+}
+
+.comment{
+    background-color: rgb(33, 32, 44);
+    width: 50vw;
+    padding: 1em;
+    margin-top: 0.5em;
+    border-radius: 1em;
+}
+
+.credentials > *, #projUserDisplay{
+    font-size: 30px;
+}
+
+.commentUserDisplay{
+    font-size: 20px;
+}
+
+input{
+    color: white;
+    background-color: rgb(39, 38, 52);
+    font-family: Calibri, sans-serif;
+    border: 0px;
+    border-radius: 10px;
+    padding: 0.1em;
+    font-size: 20px;
+}
+
+#leaveComment > input[type="text"]{
+    width: 100%;
+    height: 5vh;
+    margin: 0.5em 0em;
+    background-color: rgb(12, 11, 24);
+    border: 1px solid white;
+}
+
+
+
+input[type="submit"]{
+    cursor: pointer;
+}
+
+input[type="submit"]:hover{
+    background-color: rgb(84, 82, 112);
+}

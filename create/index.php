@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <?php include "./pageElements/navbar.php"; ?>
+    <?php include "../pageElements/navbar.php"; ?>
 
     <section id="UIScreen">
         <div class="sideBar" id="tools">

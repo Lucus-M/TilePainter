@@ -1,0 +1,40 @@
+#thumbList{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.projectThumbnail{
+    width: 15vw;
+    margin: 0.5em;
+    padding: 0.3em;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.cvsThumbnail{
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    border-radius: 1em;
+}
+
+.cvsThumbnail > canvas{
+    height: 100%;
+}
+
+.thumbNameContainer{
+    font-size: 15px;
+    height: 35px;
+    overflow: hidden;
+}
+
+.dateDisplay{
+    color: gray;
+    font-size: 20px;
+    margin-top: 3px;
+    float: right;
+}
