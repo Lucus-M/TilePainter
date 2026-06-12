@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="../images/tiles/pointerLogo.png">
+    <link rel="icon" type="image/x-icon" href="../images/pointerLogo.png">
     <title>TilePainter</title>
 </head>
 
@@ -33,28 +33,28 @@
 
                 <!--tool selection-->
                 <div class="toolSelection" onclick="user.tool = 'paintbrush'">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/brush.png" alt="paintbrush">
+                    <img src="../images/tileUI/brush.png" alt="paintbrush">
                     <p>Brush</p>
                 </div>
                 <!--
                 <div class="toolSelection">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/bucket.png">
+                    <img src="../images/tileUI/bucket.png">
                     <p>Fill Bucket</p>
                 </div>
                 -->
                 <div class="toolSelection" onclick="user.tool = 'rectangle'">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/rectangle.png" alt="rectangle">
+                    <img src="../images/tileUI/rectangle.png" alt="rectangle">
                     <p>Rectangle</p>
                 </div>
                 <!--
                 <div class="toolSelection">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/ellipse.png">
+                    <img src="../images/tileUI/ellipse.png">
                     <p>Ellipse</p>
                 </div>
                 -->
 
                 <div class="toolSelection" onclick="user.clearCanvas()">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/trash.png" alt="trash">
+                    <img src="../images/tileUI/trash.png" alt="trash">
                     <p>Delete</p>
                 </div>
                 <br>
@@ -87,7 +87,7 @@
             <div class="sideBar tab " id="tileSelectorTab">
                 <div>
                     <div id="uploadButton" class="optionButton" onclick="document.getElementById('imageUpload').click()">
-                        <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/add.png" alt="add tile">
+                        <img src="../images/tileUI/add.png" alt="add tile">
                     </div>
                     <input style="display: none;" type="file" id="imageUpload" accept="image/*">
                 </div>
@@ -105,20 +105,20 @@
                         <input type="text" id="projectNameInput" name="projectNameInput" value="Project Name">
                     </div>
                     <div id="saveToSerer" class="option">
-                        <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/floppySave.png" alt="save to account">
+                        <img src="../images/tileUI/floppySave.png" alt="save to account">
                         <h4>Save Project</h4>
                     </div>
                     <div id="uploadSheetButton" class="option" onclick="document.getElementById('jsonUpload').click()">
-                        <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/uploadtileset.png" alt="upload project json">
+                        <img src="../images/tileUI/uploadtileset.png" alt="upload project json">
                         <h4>Upload JSON Sheet</h4>
                     </div>
                     <input style="display: none;" type="file" id="jsonUpload" accept=".json">
                     <div id="downloadSheetButton" class="option">
-                        <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/downloadtileset.png" alt="download project json">
+                        <img src="../images/tileUI/downloadtileset.png" alt="download project json">
                         <h4>Dowload JSON Sheet</h4>
                     </div>
                     <div id="downloadImage" class="option">
-                        <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/downloadImage.png" alt="download as image">
+                        <img src="../images/tileUI/downloadImage.png" alt="download as image">
                         <h4>Download PNG</h4>
                     </div>
                 </div>

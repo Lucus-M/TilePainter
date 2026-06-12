@@ -7,14 +7,14 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="homeStyle.css">
-    <link rel="icon" type="image/x-icon" href="../../images/tiles/pointerLogo.ico">
+    <link rel="icon" type="image/x-icon" href="../images/pointerLogo.png">
     <title>TilePainter</title>
 </head>
 <body>
     <?php include "../pageElements/navbar.php"; ?>
 
     <div id="loadingOverlay">
-        <img src="../../images/tiles/tileUI/loading.gif" style="height: 64px;">
+        <img src="../images/tiles/tileUI/loading.gif" style="height: 64px;">
     </div>
 
     <div id="hoverLabel">
@@ -33,7 +33,7 @@
                     </div>
                     <p class="dateDisplay">a</p>
                     <div class="commentUserDisplay">
-                        <img src="../../images/tiles/profilePics/default_pfp.png">
+                        <img src="../images/tiles/profilePics/default_pfp.png">
                         <p class="commentNameDisplay">MyName</p>
                     </div>
                 </div>

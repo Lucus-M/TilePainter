@@ -13,8 +13,8 @@
         $userName = $_SESSION["username"];
     }
 
-    $createUrl = "https://www.lucusdm.com/lucus/tilesDev/create";
-    $communityUrl = "https://www.lucusdm.com/lucus/tilesDev/community";
+    $createUrl = "../create";
+    $communityUrl = "../community";
 ?>
 
 <header>
@@ -58,7 +58,7 @@
     </style>
     <div id="titleDisplay" style="display: inline-block">
         <a href="<?= $createUrl ?>">
-            <img src="../../images/tiles/tileUI/tilePainterLogo.png" style="height: 32px;">
+            <img src="../images/tileUI/tilePainterLogo.png" style="height: 32px;">
         </a>
     </div>
 
@@ -74,7 +74,7 @@
             </div>
         </a>
         <div class="userButton" id="userClick">
-            <img id="pfp" src="../../images/tiles/profilePics/default_pfp.png">
+            <img id="pfp" src="../images/profilePics/default_pfp.png">
             <p>
                 <span id="usernameDisplay">
                     <a href="../community/login.php">Log In</a>

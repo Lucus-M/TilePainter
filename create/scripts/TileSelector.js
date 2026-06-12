@@ -31,7 +31,7 @@ export default class TileSelector {
 
         for(let i = 0; i <= amount; i++){
             // Fetch the sample tile images and store them as base 64 data
-            fetch("https://www.lucusdm.com/lucus/images/tiles/sampleTiles/"+ i +".png")
+            fetch("../../images/sampleTiles/"+ i +".png")
                 .then(response => response.blob()) 
                 .then(blob => {
                     this.uploadImage(blob);

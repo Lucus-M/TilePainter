@@ -3,7 +3,7 @@
     header("Pragma: no-cache");
 
     if(!isset($_GET["proj_id"])){
-        header("Location: ./community");
+        header("Location: ../community");
         exit;
     }
 
@@ -18,19 +18,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="../../images/tiles/pointerLogo.ico">
+    <link rel="icon" type="image/x-icon" href="../images/pointerLogo.png">
     <title>TilePainter</title>
 </head>
 <body>
     <!--
     <div id="loadingOverlay">
-        <img src="../images/tiles/tileUI/loading.gif" style="height: 64px;">
+        <img src="../images/tileUI/loading.gif" style="height: 64px;">
     </div>
     -->
     <?php include "../pageElements/navbar.php"; ?>
 
     <div id="loadingOverlay">
-        <img src="../../images/tiles/tileUI/loading.gif" style="height: 64px;">
+        <img src="../images/tileUI/loading.gif" style="height: 64px;">
     </div>
 
     <div id="hoverLabel">
@@ -41,31 +41,31 @@
         <div id="buttonsContainer">
             <div id="projButtons">
                 <div id="zoomInButton" class="option" data-hover_data="Zoom In">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/zoom_in.png" alt="download as image">
+                    <img src="../images/tileUI/zoom_in.png" alt="download as image">
                 </div>
 
                 <div id="zoomOutButton" class="option" data-hover_data="Zoom Out">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/zoom_out.png" alt="download as image">
+                    <img src="../images/tileUI/zoom_out.png" alt="download as image">
                 </div>
 
                 <div id="downloadProjButton" class="option" data-hover_data="Download Project">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/download_proj.png" alt="download as image">
+                    <img src="../images/tileUI/download_proj.png" alt="download as image">
                 </div>
 
                 <div id="reportButton" class="option" data-hover_data="Report" style="background-color: orange;">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/report.png" alt="download as image">
+                    <img src="../images/tileUI/report.png" alt="download as image">
                 </div>
 
                 <div id="editButton" class="option" data-hover_data="Edit" style="display: none; background-color: green;">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/edit.png" alt="download as image">
+                    <img src="../images/tileUI/edit.png" alt="download as image">
                 </div>
 
                 <div id="privateButton" class="option" data-hover_data="Make Private" style="display: none; background-color: blue;">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/lock.png" alt="download as image">
+                    <img src="../images/tileUI/lock.png" alt="download as image">
                 </div>
 
                 <div id="deleteButton" class="option" data-hover_data="Delete" style="display: none; background-color: red;">
-                    <img src="https://www.lucusdm.com/lucus/images/tiles/tileUI/delete.png" alt="download as image">
+                    <img src="../images/tileUI/delete.png" alt="download as image">
                 </div>
             </div>
 
@@ -84,7 +84,7 @@
         </div>
 
         <div id="projUserDisplay">
-            <img id="pfp" src="../../images/tiles/profilePics/default_pfp.png" style="width: 32px;">
+            <img id="pfp" src="../images/tiles/profilePics/default_pfp.png" style="width: 32px;">
             <p id="projUserNameDisplay">...</p>
         </div>
 
@@ -116,7 +116,7 @@
             <template id="commentTemplate">
                 <div class="comment">
                     <div class="commentUserDisplay">
-                        <img class="pfp" src="../images/tiles/profilePics/default_pfp.png" style="width: 32px;">
+                        <img class="pfp" src="../images/profilePics/default_pfp.png" style="width: 32px;">
                         <p class="commentNameDisplay">MyName</p>
                     </div>
                     <p style="color: gray" class="commentDateDisplay">00/00/0000</p>
