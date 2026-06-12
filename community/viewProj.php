@@ -84,7 +84,7 @@
         </div>
 
         <div id="projUserDisplay">
-            <img id="pfp" src="../images/tiles/profilePics/default_pfp.png" style="width: 32px;">
+            <img id="pfp" src="../images/profilePics/default_pfp.png" style="width: 32px;">
             <p id="projUserNameDisplay">...</p>
         </div>
 
@@ -130,6 +130,14 @@
         <p id="scaleDisplay" style="display: none"></p>
     </footer>
 
+    <script type="module">
+        import { initView } from "./viewprojUI.js";
+        const projId = <?= json_encode($projId)?>;
+        const userId = <?= json_encode($userId)?>;
+
+        initView(userId, projId);
+    </script>  
+<!--
     <script type="module">    
         import { createCanvas } from "./imgDisplayTest.js";
         import Canvas from '../create/scripts/Canvas.js';
@@ -137,7 +145,7 @@
         import {addComment, loadComments, displayComments} from '../community/handleComments/handleComments.js';
 
         // Pass the PHP variable to JS
-        let projId = <?= json_encode($projId)?>;
+        const projId = <?= json_encode($projId)?>;
 
         let canvasData = null;
         let canvas = null;
@@ -434,5 +442,6 @@
     </script>
 
     <script src="../create/scripts/events/HoverLabel.js"></script>
+-->
 </body>
 </html>
