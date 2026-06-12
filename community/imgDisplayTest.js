@@ -2,23 +2,31 @@ import Canvas from '../create/scripts/Canvas.js';
 import FileHandler from '../create/scripts/events/FileHandler.js';
 import TileSelector from '../create/scripts/TileSelector.js';
 
-
+//create the canvas element to display a user's project
 export async function createCanvas(userId, projectId, parentDom){
-    //create new canvas object
+    //create new canvas dom element
     let canvasDom = document.createElement("canvas");
     canvasDom.id = projectId;
 
+    //append to parent element
     parentDom.appendChild(canvasDom);
+
+    //tile selector object
     const tileSelector = new TileSelector();
+
+    //create canvas object with functionality
     const canvas = new Canvas(tileSelector, canvasDom.id, {x: 1, y: 1});
 
     //load project from file
     const projectJson = await loadProject(userId, projectId)
-    new FileHandler(tileSelector, canvas).loadFromJson(projectJson);
+
+    //load 
+    new FileHandler(tileSelector, canvas).loadFromJson(projectJson); 
 
     return {canvas, canvasDom};
 }
 
+//load all of a given user's projects
 export async function loadAll(userId) {
     try {                
         // Fetch and wait for JSON to load
@@ -69,7 +77,10 @@ export async function loadAll(userId) {
     }
 }
 
+//load JSON data from a single project file
 async function loadProject(userId, projId){
+    //project directory identified by userid and projectid
+    //does not cache JSON file in browser, so that project appears updated
     const url = `./projects/${userId}/${projId}.json?nocache=${Date.now()}`;
 
     const response = await fetch(url);

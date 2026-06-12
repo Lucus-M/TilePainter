@@ -67,22 +67,20 @@
         <p id="scaleDisplay" style="display: none"></p>
     </footer>
 
-    <script type="module">    
+    <script type="module">
         import { loadAll } from "./imgDisplayTest.js";
 
-        // Pass the PHP variable to JS
-        let userName = <?= json_encode($userName) ?>;
-        let userId = <?= json_encode($userId)?>;
-        let pageName = <?= json_encode($pageName)?>;
+        // pass the PHP session variables to JS
+        const userName = <?= json_encode($userName) ?>;
+        const userId = <?= json_encode($userId)?>;
+        const pageName = <?= json_encode($pageName)?>;
 
-        let userPage = <?= json_encode($description)?>;
-
-        if(userId && userName){
-            document.getElementById("usernameDisplay").innerText = userName;
-        }
-        
         window.addEventListener("load", async function() {
-            console.log(pageName);
+            //if user is logged in
+            if(userId && userName){
+                document.getElementById("usernameDisplay").innerText = userName;
+            }
+            //get user account data
             let response = await fetch(`accountHandlers/getAccountData.php?user_id=${pageName}`);
             
             if (!response.ok) {
