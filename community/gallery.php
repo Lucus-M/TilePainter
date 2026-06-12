@@ -31,7 +31,7 @@
     <?php include "../pageElements/navbar.php"; ?>
 
     <div id="loadingOverlay">
-        <img src="../images/tiles/loading.gif" style="height: 64px;">
+        <img src="../images/tileUI/loading.gif" style="height: 64px;">
     </div>
 
     <div id="hoverLabel">
