@@ -56,7 +56,7 @@ footer{
 
 #mainCanvas{
     background-color: gray;
-    background-image: url("https://www.lucusdm.com/lucus/images/tiles/tileUI/transparentbg.png");
+    background-image: url("../images/tileUI/transparentbg.png");
     image-rendering: crisp-edges;
     image-rendering: pixelated;
     position: absolute;

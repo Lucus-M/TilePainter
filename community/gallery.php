@@ -24,14 +24,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/x-icon" href="../images/pointerLogo.png">
+    <link rel="icon" type="image/x-icon" href="../images/pointerLogo.ico">
     <title>TilePainter</title>
 </head>
 <body>
     <?php include "../pageElements/navbar.php"; ?>
 
     <div id="loadingOverlay">
-        <img src="../images/tiles/tileUI/loading.gif" style="height: 64px;">
+        <img src="../images/tiles/loading.gif" style="height: 64px;">
     </div>
 
     <div id="hoverLabel">
@@ -41,7 +41,7 @@
     <section class="form galleryScreen">
         <section style="display: flex; margin-top: 0.5em; height: 128px">
             <div>
-                <img src="../images/tiles/profilePics/default_pfp.png" style="height: 100%;">
+                <img src="../images/profilePics/default_pfp.png" style="height: 100%;">
             </div>
             <div style="margin-left: 0.7em;">
                 <h1 id="userDisplay"></h1>

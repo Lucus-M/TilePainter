@@ -18,7 +18,7 @@ html, body{
 }
 
 body{
-    background-image: url("../../images/tiles/backgrounds/scroll.png");
+    background-image: url("../images/backgrounds/scroll.png");
 }
 
 #hoverLabel{
@@ -186,7 +186,7 @@ header{
 }
 
 canvas{
-    background-image: url("../../images/tiles/tileUI/transparentbg.png");
+    background-image: url("../images/tileUI/transparentbg.png");
 }
 
 #projNameDisplay{
@@ -194,7 +194,7 @@ canvas{
 }
 
 #projectList > #canvasContainer > canvas{
-    background-image: url("../../images/tiles/tileUI/transparentbg.png");
+    background-image: url("../images/tileUI/transparentbg.png");
     margin: 5px;
     min-width: 32px;
     height: 20vh;

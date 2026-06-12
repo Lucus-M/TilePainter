@@ -11,10 +11,12 @@
     if (isset($_SESSION["user_id"]) && isset($_SESSION["username"])) {
         $userId = $_SESSION["user_id"];
         $userName = $_SESSION["username"];
+        $description = $_SESSION["description"];
     }
 
     $createUrl = "../create";
     $communityUrl = "../community";
+
 ?>
 
 <header>
